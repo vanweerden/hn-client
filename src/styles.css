@@ -3,3 +3,55 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+#root {
+  font-family: "Helvetica", "Arial", sans-serif;
+}
+
+/* Colors */
+:root {
+  --darkText: #999;
+  --lightText: #777;
+  --highlight: blue;
+}
+
+#main {
+  width: 75vw;
+  margin: 0 auto;
+}
+
+.card {
+  margin: 0.5em;
+  padding: 0.5em;
+  display: flex;
+  align-items: flex-start;
+  color: var(--lightText);
+}
+
+.rank {
+  margin-right: 1em;
+  font-size: 1.7em;
+}
+
+.article {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin-bottom: 0.5em;
+}
+
+.title a {
+  color: black; /* Change this for color scheme */
+  text-decoration: none;
+  font-size: 1.2em;
+}
+
+.domain {
+  font-size: 0.8em;
+}
+
+.subtitle {
+  font-size: 0.7em;
+}

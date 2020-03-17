@@ -23,15 +23,17 @@ function Card(props) {
 
   // String to be inserted into Card
   const time = min < 60 ? min === 1 ? min + " minute"
-                                    : min + "minutes"
+                                    : min + " minutes"
                         : hr === 1 ? + hr + " hour"
                                      : hr + " hours";
 
   return (
-    <div className="card">
-      <div className="title"><span className="rank">{props.rank}</span><a href={url} target='_blank' className="storylink">{item.title}</a><span className='website'> {domain}</span></div>
-
-      <div className="subtitle"><span className="score">{item.score} points</span><span className="user"> by {item.by}</span><span className="time"> {time} ago</span></div>
+    <div className='card'>
+      <div className='rank'>{props.rank}</div>
+      <div className='article'>
+        <div className='title'><a href={url} target='_blank' rel='noopener noreferrer' className='newslink'>{item.title}</a><span className='domain'> {domain}</span></div>
+        <div className='subtitle'><span className='score'>{item.score} points</span><span className='user'> by {item.by}</span><span className='time'> {time} ago</span></div>
+      </div>
     </div>
   );
 }
@@ -50,7 +52,7 @@ function List(props) {
     }
   });
   return (
-    <div>{listItems}</div>
+    <div id='main'>{listItems}</div>
   )
 }
 
@@ -90,7 +92,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="app">
         <List items={this.state.stories} />
       </div>
     );
