@@ -5,6 +5,15 @@ import './styles.css';
 // Items are accessed from HN API like so: https://hacker-news.firebaseio.com/v0/item/<id>.json
 // Array of top 500 stories: https://hacker-news.firebaseio.com/v0/topstories.json
 
+function Header(props) {
+  return (
+    <header>
+      <div id='header-title'>React Hacker News</div>
+      <div id='header-author'>by Andrew van Weerden</div>
+    </header>
+  );
+}
+
 // Presents info of one news item
 function Card(props) {
   const item = props.item;
@@ -31,7 +40,7 @@ function Card(props) {
     <div className='card'>
       <div className='rank'>{props.rank}</div>
       <div className='article'>
-        <div className='title'><a href={url} target='_blank' rel='noopener noreferrer' className='newslink'>{item.title}</a><span className='domain'> {domain}</span></div>
+        <div className='card-title'><a href={url} target='_blank' rel='noopener noreferrer' className='newslink'>{item.title}</a><span className='domain'> {domain}</span></div>
         <div className='subtitle'><span className='score'>{item.score} points</span><span className='user'> by {item.by}</span><span className='time'> {time} ago</span></div>
       </div>
     </div>
@@ -52,7 +61,7 @@ function List(props) {
     }
   });
   return (
-    <div id='main'>{listItems}</div>
+    <div id='list'>{listItems}</div>
   )
 }
 
@@ -93,6 +102,7 @@ class App extends React.Component {
   render() {
     return (
       <div id="app">
+        <Header />
         <List items={this.state.stories} />
       </div>
     );
