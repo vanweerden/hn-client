@@ -1,4 +1,4 @@
-###Hacker News Client
+### Hacker News Client
 This is a React client that fetches data from the Hacker News API ([see here](https://github.com/HackerNews/API)) and displays it. 
 
 I wanted experience interacting with an API and using React outide of a sandbox.
