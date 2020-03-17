@@ -2,32 +2,38 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles.css';
 
-// Items are accessed like so: https://hacker-news.firebaseio.com/v0/item/<id>.json
+// Items are accessed from HN API like so: https://hacker-news.firebaseio.com/v0/item/<id>.json
 // Array of top 500 stories: https://hacker-news.firebaseio.com/v0/topstories.json
 
 // Presents info of one news item
 function Card(props) {
   const item = props.item;
 
-  // Calculates ms since it was posted (stored as UNIX timestamp)
+  // Hacker News articles do not have url in JSON
+  const url = item.url ? item.url : "https://news.ycombinator.com/item?id=" + item.id;
+
+  // Grab domain of article url (helper function below)
+  // Only if it's NOT from HN
+  const domain = item.url ? '(' + domainGrabber(url) + ')' : "";
+
+  // Calculates ms since article posted (stored as UNIX timestamp)
   const ms = (Date.now() - item.time * 1000);
   const min = Math.floor((ms / 1000) / 60);
   const hr = Math.floor(min / 60);
 
-  // If posted less than an hour ago, post minutes, else hours
-  const time = min < 60 ? min + " minutes"
-                        // Handle plurality of hours
+  // String to be inserted into Card
+  const time = min < 60 ? min === 1 ? min + " minute"
+                                    : min + "minutes"
                         : hr === 1 ? + hr + " hour"
                                      : hr + " hours";
 
   return (
     <div className="card">
-      <div className="title"><span className="rank">{props.rank}</span><a href={item.url} target='_blank' className="storylink">{item.title}</a><span className='website'></span></div>
+      <div className="title"><span className="rank">{props.rank}</span><a href={url} target='_blank' className="storylink">{item.title}</a><span className='website'> {domain}</span></div>
 
       <div className="subtitle"><span className="score">{item.score} points</span><span className="user"> by {item.by}</span><span className="time"> {time} ago</span></div>
     </div>
   );
-
 }
 
 // List of all news items: eventually use Card component to do this
@@ -92,3 +98,11 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
+
+// Helper function: grabs domain and top-level domain from url
+function domainGrabber(url) {
+  let regex = /(http(s)?:\/\/(www.)?)([a-zA-Z0-9-]+[\w.]+)(\/)?/;
+  let result = url.match(regex);
+  if (result) return result[4];
+  else console.log("Something went wrong with URL grabber");
+}
