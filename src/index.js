@@ -8,25 +8,28 @@ import './styles.css';
 // Will present news item info prettily
 class Card extends React.Component {
   render() {
-    return <div></div>
+    return
+    <div>
+
+    </div>
   }
 }
 
 // List of all news items: eventually use Card component to do this
-class List extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>Top News Stories</h1>
-        {this.props.items.map( item => (
-          <div className="card">
-            <div className="title">{item.title}</div>
-            <div className="info">{item.score} points by {item.by}</div>
-          </div>
-        ))}
-      </div>
-    )
-  }
+function List(props) {
+  const items = props.items;
+  const limit = 30;  // Number of items to display on page
+  const listItems = items.map((item, i) => {
+    if (i < limit) {
+      return <li key={item.id}>{item.title}</li>
+    }
+  });
+  return (
+    <div>
+      <h1>Top News Stories</h1>
+      <ol>{listItems}</ol>
+    </div>
+  )
 }
 
 class App extends React.Component {
@@ -47,18 +50,18 @@ class App extends React.Component {
 
         // Make a request for first item in data arr and append to this.state
         // In future: change to forEach()
-        let url = 'https://hacker-news.firebaseio.com/v0/item/' + data[0] + '.json';
-        console.log(url);
-        fetch(url)
-          .then(item => item.json())
-          .then(data => {
-            let updatedStories = this.state.stories.concat(data);
-            this.setState({
-              stories: updatedStories
-            });
-            console.log(this.state);
-          })
-          .catch(err => console.log("ERROR: ", err.message));
+        data.forEach( id => {
+          let url = 'https://hacker-news.firebaseio.com/v0/item/' + id + '.json';
+          fetch(url)
+            .then(item => item.json())
+            .then(data => {
+              let updatedStories = this.state.stories.concat(data);
+              this.setState({
+                stories: updatedStories
+              });
+            })
+            .catch(err => console.log("ERROR: ", err.message));
+        });
       })
       .catch(err => console.log("ERROR: ", err.message));
   }
