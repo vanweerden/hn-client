@@ -15,6 +15,12 @@
   --highlight: #9cccff;
 }
 
+/* Entire page */
+#app {
+  width: 75vw;
+  margin: 0 auto;
+}
+
 header {
   border-bottom: 1px solid var(--highlight);
   height: 80px;
@@ -35,8 +41,7 @@ header {
 }
 
 #list {
-  width: 75vw;
-  margin: 0 auto;
+
   padding-top: 1em;
   margin-top: 1em;
 }
@@ -75,12 +80,6 @@ header {
 
 .subtitle {
   font-size: 0.7em;
-}
-
-#pageNav {
-  display: flex;
-  width: 75vw;
-  margin: 0 auto;
 }
 
 .pageNav-button {
