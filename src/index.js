@@ -50,8 +50,7 @@ function Card(props) {
 // Container for Card components
 function List(props) {
   const stories = props.stories;  // array of JSON news items
-  const totalLimit = 100; // Total number of news items to grab
-  const pageLimit = 30; // No. of stories to display per page
+  const pageLimit = 25; // No. of stories to display per page
   let page = props.pageNumber; // Increments/decrements when 'Next' and 'Prev' buttons
   let lastEntry = page * pageLimit;
   let firstEntry = lastEntry - (pageLimit - 1);
@@ -60,9 +59,10 @@ function List(props) {
   const listItems = stories
     .slice((firstEntry - 1), lastEntry)
     .map((item, i) => {
+      const rank = pageLimit * (page - 1) + (i + 1);
       return (
         <Card item={item}
-              rank={i + 1}
+              rank={rank}
               key={item.id} />
       );
   });
@@ -72,15 +72,32 @@ function List(props) {
   )
 }
 
+function NextButton(props) {
+  return (
+    <button className="pageNav-button"
+            onClick={props.onNext}
+            >Next</button>
+  );
+
+}
+
+function PrevButton(props) {
+  return (
+    <button className="pageNav-button"
+              onClick={props.onPrev}
+              >Prev</button>
+  );
+}
+
 function PageNav(props) {
   return (
     <div id="pageNav">
-      <button className="pageNav-button"
-              onClick={props.onPrev}
-              >Prev</button>
-      <button className="pageNav-button"
-              onClick={props.onNext}
-              >Next</button>
+      <PrevButton
+        onPrev={props.onPrev}
+        page={props.page}/>
+      <NextButton
+        onNext={props.onNext}
+        page={props.page}/>
     </div>
   );
 }
@@ -139,6 +156,7 @@ class App extends React.Component {
         <PageNav
           onNext={this.handleNext}
           onPrev={this.handlePrev}
+          page={this.state.pageNumber}
         />
         <List
           stories={this.state.stories}
