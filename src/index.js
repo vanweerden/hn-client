@@ -105,10 +105,10 @@ function PageNav(props) {
     <div id="pageNav">
       <PrevButton
         onPrev={props.onPrev}
-        page={props.page}/>
+        page={props.page} />
       <NextButton
         onNext={props.onNext}
-        page={props.page}/>
+        page={props.page} />
     </div>
   );
 }

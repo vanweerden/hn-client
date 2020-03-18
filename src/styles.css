@@ -76,3 +76,14 @@ header {
 .subtitle {
   font-size: 0.7em;
 }
+
+#pageNav {
+  display: flex;
+  width: 75vw;
+  margin: 0 auto;
+}
+
+.pageNav-button {
+  padding: 5px;
+  margin: 5px;
+}
