@@ -14,7 +14,7 @@ function Header(props) {
   );
 }
 
-// Presents info of one news item
+// Presents info of a single news item
 function Card(props) {
   const item = props.item;
 
@@ -47,18 +47,24 @@ function Card(props) {
   );
 }
 
-// List of all news items: eventually use Card component to do this
+// Container for Card components
 function List(props) {
-  const items = props.items;
-  const limit = 30;  // Number of items to display on page
+  const stories = props.stories;  // array of JSON news items
+  const totalLimit = 100; // Total number of news items to grab
+  const pageLimit = 25; // No. of stories to display per page
+  let pageNumber = 1; // Increments/decrements when 'Next' and 'Prev' buttons
+  let lastEntry = pageNumber * pageLimit;
+  let firstEntry = lastEntry - (pageLimit - 1);
 
-  // Passes each news item JSON object to Card component
-  const listItems = items.map((item, i) => {
-    if (i < limit) {
-      return <Card item={item}
-                   rank={i + 1} // Rank on website (based on array index)
-                   key={item.id} />
-    }
+  // Uses array of JSON news items to generate Card for each
+  const listItems = stories
+    .slice((firstEntry - 1), lastEntry) // index will be xEntry - 1
+    .map((item, i) => {
+      return (
+        <Card item={item}
+              rank={i + 1} // Rank on website (based on array index)
+              key={item.id} />
+      );
   });
   return (
     <div id='list'>{listItems}</div>
@@ -77,12 +83,10 @@ class App extends React.Component {
   componentDidMount() {
     // Fetch array of IDs and store in variable
     fetch('https://hacker-news.firebaseio.com/v0/topstories.json')
-      .then(res => res.json())
+      .then( res => res.json() )
       .then( data => {
         console.log("Top story IDs: ", data);
 
-        // Make a request for first item in data arr and append to this.state
-        // In future: change to forEach()
         data.forEach( id => {
           let url = 'https://hacker-news.firebaseio.com/v0/item/' + id + '.json';
           fetch(url)
@@ -103,7 +107,7 @@ class App extends React.Component {
     return (
       <div id="app">
         <Header />
-        <List items={this.state.stories} />
+        <List stories={this.state.stories} />
       </div>
     );
   }
