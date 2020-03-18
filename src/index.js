@@ -51,33 +51,62 @@ function Card(props) {
 function List(props) {
   const stories = props.stories;  // array of JSON news items
   const totalLimit = 100; // Total number of news items to grab
-  const pageLimit = 25; // No. of stories to display per page
-  let pageNumber = 1; // Increments/decrements when 'Next' and 'Prev' buttons
-  let lastEntry = pageNumber * pageLimit;
+  const pageLimit = 30; // No. of stories to display per page
+  let page = props.pageNumber; // Increments/decrements when 'Next' and 'Prev' buttons
+  let lastEntry = page * pageLimit;
   let firstEntry = lastEntry - (pageLimit - 1);
 
   // Uses array of JSON news items to generate Card for each
   const listItems = stories
-    .slice((firstEntry - 1), lastEntry) // index will be xEntry - 1
+    .slice((firstEntry - 1), lastEntry)
     .map((item, i) => {
       return (
         <Card item={item}
-              rank={i + 1} // Rank on website (based on array index)
+              rank={i + 1}
               key={item.id} />
       );
   });
+
   return (
     <div id='list'>{listItems}</div>
   )
+}
+
+function PageNav(props) {
+  return (
+    <div id="pageNav">
+      <button className="pageNav-button"
+              onClick={props.onPrev}
+              >Prev</button>
+      <button className="pageNav-button"
+              onClick={props.onNext}
+              >Next</button>
+    </div>
+  );
 }
 
 class App extends React.Component {
   constructor(props) {
     super(props);
       // Top stories should be kept here in JSON format
-      this.state = {
-        stories: [],
-      };
+    this.state = {
+      stories: [],
+      pageNumber: 1
+    };
+    this.handleNext = this.handleNext.bind(this);
+    this.handlePrev = this.handlePrev.bind(this);
+  }
+
+  handleNext() {
+    this.setState((state, props) => ({
+      pageNumber: state.pageNumber + 1
+    }));
+  }
+
+  handlePrev() {
+    this.setState((state, props) => ({
+      pageNumber: state.pageNumber - 1
+    }));
   }
 
   componentDidMount() {
@@ -107,7 +136,13 @@ class App extends React.Component {
     return (
       <div id="app">
         <Header />
-        <List stories={this.state.stories} />
+        <PageNav
+          onNext={this.handleNext}
+          onPrev={this.handlePrev}
+        />
+        <List
+          stories={this.state.stories}
+          pageNumber={this.state.pageNumber} />
       </div>
     );
   }
