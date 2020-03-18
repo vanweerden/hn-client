@@ -72,21 +72,32 @@ function List(props) {
   )
 }
 
+// shouldDisplay hard-coded for now
+// checks should be made dynamic (base on number per page and last entry)
 function NextButton(props) {
-  return (
-    <button className="pageNav-button"
-            onClick={props.onNext}
-            >Next</button>
-  );
-
+  const shouldDisplay = props.page < 20;
+  if (shouldDisplay) {
+    return (
+      <button className="pageNav-button"
+              onClick={props.onNext}
+              >Next</button>
+    );
+  } else {
+    return null;
+  }
 }
 
 function PrevButton(props) {
-  return (
-    <button className="pageNav-button"
-              onClick={props.onPrev}
-              >Prev</button>
-  );
+  const shouldDisplay = props.page > 1;
+  if (shouldDisplay) {
+    return (
+      <button className="pageNav-button"
+                onClick={props.onPrev}
+                >Prev</button>
+    );
+  } else {
+      return null;
+  }
 }
 
 function PageNav(props) {
@@ -153,14 +164,15 @@ class App extends React.Component {
     return (
       <div id="app">
         <Header />
+        <List
+          stories={this.state.stories}
+          pageNumber={this.state.pageNumber}
+        />
         <PageNav
           onNext={this.handleNext}
           onPrev={this.handlePrev}
           page={this.state.pageNumber}
         />
-        <List
-          stories={this.state.stories}
-          pageNumber={this.state.pageNumber} />
       </div>
     );
   }
