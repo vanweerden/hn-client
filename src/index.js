@@ -78,18 +78,20 @@ const Button = (props) => {
 const PageNav = (props) => {
   return (
     <div id="pageNav">
-      <Button
-        value="Prev"
-        onClick={props.handlePrev}
-        page={props.page}
-        shouldDisplay={props.page > 1}
+      <div id="btnContainer">
+        <Button
+          value="Prev"
+          onClick={props.handlePrev}
+          page={props.page}
+          shouldDisplay={props.page > 1}
+          />
+        <Button
+          value="Next"
+          onClick={props.handleNext}
+          page={props.page}
+          shouldDisplay={props.page < 20}
         />
-      <Button
-        value="Next"
-        onClick={props.handleNext}
-        page={props.page}
-        shouldDisplay={props.page < 20}
-      />
+      </div>
     </div>
   );
 }

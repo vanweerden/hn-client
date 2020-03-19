@@ -82,6 +82,12 @@ header {
   font-size: 0.7em;
 }
 
+#btnContainer {
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .navButton {
   padding: 5px;
   margin: 1em 5px 3em 0;
