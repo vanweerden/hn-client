@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles.css';
 
-function Header(props) {
+const Header = (props) => {
   return (
     <header>
       <div id='header-title'>React Hacker News</div>
@@ -11,20 +11,17 @@ function Header(props) {
   );
 }
 
-// Presents info of a single news item
-function NewsItem(props) {
+// Split into Container and Presentational
+const NewsItem = (props) => {
   const item = props.item;
 
-  // Hacker News articles do not have url in JSON
+  // Hacker News articles do not have url in JSON object
   const url = item.url ? item.url : "https://news.ycombinator.com/item?id=" + item.id;
-
-  // Grab domain of article url if not from HN (helper function below)
   const domain = item.url ? '(' + domainGrabber(url) + ')' : "";
 
   const ms = (Date.now() - item.time * 1000);
   const min = Math.floor((ms / 1000) / 60);
   const hr = Math.floor(min / 60);
-
   const time = min < 60 ? min === 1 ? min + " minute"
                                     : min + " minutes"
                         : hr === 1 ? + hr + " hour"
@@ -41,14 +38,14 @@ function NewsItem(props) {
   );
 }
 
-function NewsList(props) {
-  const stories = props.stories;  // array of JSON news items
-  const pageLimit = 25; // No. of stories to display per page
-  let page = props.pageNumber; // Increments/decrements when 'Next' and 'Prev' buttons
+// TODO: Split into Presentational and Container
+const NewsList = (props) => {
+  const stories = props.stories;
+  const pageLimit = 25;
+  let page = props.pageNumber;
   let lastEntry = page * pageLimit;
   let firstEntry = lastEntry - (pageLimit - 1);
 
-  // Uses array of JSON news items to generate Card for each
   const listItems = stories
     .slice((firstEntry - 1), lastEntry)
     .map((item, i) => {
@@ -65,9 +62,7 @@ function NewsList(props) {
   )
 }
 
-// shouldDisplay hard-coded for now
-// checks should be made dynamic (base on number per page and last entry)
-function Button(props) {
+const Button = (props) => {
   if (props.shouldDisplay) {
     return (
       <button className="navButton"
@@ -80,7 +75,7 @@ function Button(props) {
   }
 }
 
-function PageNav(props) {
+const PageNav = (props) => {
   return (
     <div id="pageNav">
       <Button
@@ -99,7 +94,8 @@ function PageNav(props) {
   );
 }
 
-class App extends React.Component {
+// TODO: break up page number handling and JSON data handling
+class NewsContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -129,6 +125,7 @@ class App extends React.Component {
       .then( data => {
         console.log("Top story IDs: ", data);
 
+        // Fetch news story using each ID and push to state
         data.forEach( id => {
           let url = 'https://hacker-news.firebaseio.com/v0/item/' + id + '.json';
           fetch(url)
@@ -147,8 +144,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div id="app">
-        <Header />
+      <div id="newsContainer">
         <NewsList
           stories={this.state.stories}
           pageNumber={this.state.pageNumber}
@@ -162,6 +158,13 @@ class App extends React.Component {
     );
   }
 }
+
+const App = () => (
+  <div id="app">
+    <Header />
+    <NewsContainer />
+  </div>
+);
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
