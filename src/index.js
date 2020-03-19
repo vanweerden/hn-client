@@ -2,9 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles.css';
 
-// Items are accessed from HN API like so: https://hacker-news.firebaseio.com/v0/item/<id>.json
-// Array of top 500 stories: https://hacker-news.firebaseio.com/v0/topstories.json
-
 function Header(props) {
   return (
     <header>
@@ -15,22 +12,19 @@ function Header(props) {
 }
 
 // Presents info of a single news item
-function Card(props) {
+function NewsItem(props) {
   const item = props.item;
 
   // Hacker News articles do not have url in JSON
   const url = item.url ? item.url : "https://news.ycombinator.com/item?id=" + item.id;
 
-  // Grab domain of article url (helper function below)
-  // Only if it's NOT from HN
+  // Grab domain of article url if not from HN (helper function below)
   const domain = item.url ? '(' + domainGrabber(url) + ')' : "";
 
-  // Calculates ms since article posted (stored as UNIX timestamp)
   const ms = (Date.now() - item.time * 1000);
   const min = Math.floor((ms / 1000) / 60);
   const hr = Math.floor(min / 60);
 
-  // String to be inserted into Card
   const time = min < 60 ? min === 1 ? min + " minute"
                                     : min + " minutes"
                         : hr === 1 ? + hr + " hour"
@@ -47,8 +41,7 @@ function Card(props) {
   );
 }
 
-// Container for Card components
-function List(props) {
+function NewsList(props) {
   const stories = props.stories;  // array of JSON news items
   const pageLimit = 25; // No. of stories to display per page
   let page = props.pageNumber; // Increments/decrements when 'Next' and 'Prev' buttons
@@ -61,7 +54,7 @@ function List(props) {
     .map((item, i) => {
       const rank = pageLimit * (page - 1) + (i + 1);
       return (
-        <Card item={item}
+        <NewsItem item={item}
               rank={rank}
               key={item.id} />
       );
@@ -74,41 +67,34 @@ function List(props) {
 
 // shouldDisplay hard-coded for now
 // checks should be made dynamic (base on number per page and last entry)
-function NextButton(props) {
-  const shouldDisplay = props.page < 20;
-  if (shouldDisplay) {
+function Button(props) {
+  if (props.shouldDisplay) {
     return (
-      <button className="pageNav-button"
-              onClick={props.onNext}
-              >Next</button>
+      <button className="navButton"
+              onClick={props.onClick}>
+              {props.value}
+     </button>
     );
   } else {
     return null;
   }
 }
 
-function PrevButton(props) {
-  const shouldDisplay = props.page > 1;
-  if (shouldDisplay) {
-    return (
-      <button className="pageNav-button"
-                onClick={props.onPrev}
-                >Prev</button>
-    );
-  } else {
-      return null;
-  }
-}
-
 function PageNav(props) {
   return (
     <div id="pageNav">
-      <PrevButton
-        onPrev={props.onPrev}
-        page={props.page} />
-      <NextButton
-        onNext={props.onNext}
-        page={props.page} />
+      <Button
+        value="Prev"
+        onClick={props.handlePrev}
+        page={props.page}
+        shouldDisplay={props.page > 1}
+        />
+      <Button
+        value="Next"
+        onClick={props.handleNext}
+        page={props.page}
+        shouldDisplay={props.page < 20}
+      />
     </div>
   );
 }
@@ -116,7 +102,6 @@ function PageNav(props) {
 class App extends React.Component {
   constructor(props) {
     super(props);
-      // Top stories should be kept here in JSON format
     this.state = {
       stories: [],
       pageNumber: 1
@@ -164,13 +149,13 @@ class App extends React.Component {
     return (
       <div id="app">
         <Header />
-        <List
+        <NewsList
           stories={this.state.stories}
           pageNumber={this.state.pageNumber}
         />
         <PageNav
-          onNext={this.handleNext}
-          onPrev={this.handlePrev}
+          handleNext={this.handleNext}
+          handlePrev={this.handlePrev}
           page={this.state.pageNumber}
         />
       </div>
