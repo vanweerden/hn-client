@@ -49,7 +49,6 @@ const NewsItemContainer = (props) => {
                    key={item.id} />
 }
 
-// TODO: Split into Presentational and Container
 const NewsList = (props) => {
   const stories = props.stories;
   const pageLimit = 25;
@@ -67,7 +66,6 @@ const NewsList = (props) => {
                            key={item.id} />
       );
   });
-
   return (
     <div id='list'>{listItems}</div>
   )
@@ -107,14 +105,10 @@ const PageNav = (props) => {
   );
 }
 
-// TODO: break up page number handling and JSON data handling
-class NewsContainer extends React.Component {
+class PageHandler extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      stories: [],
-      pageNumber: 1
-    };
+    this.state = { pageNumber: 1 };
     this.handleNext = this.handleNext.bind(this);
     this.handlePrev = this.handlePrev.bind(this);
   }
@@ -129,6 +123,32 @@ class NewsContainer extends React.Component {
     this.setState((state, props) => ({
       pageNumber: state.pageNumber - 1
     }));
+  }
+
+  render() {
+    return (
+      <div id="newsContainer">
+        <NewsList
+          stories={this.props.stories}
+          pageNumber={this.state.pageNumber}
+        />
+        <PageNav
+          handleNext={this.handleNext}
+          handlePrev={this.handlePrev}
+          page={this.state.pageNumber}
+        />
+      </div>
+    );
+  }
+}
+
+class NewsContainer extends React.Component {
+  // Fetchs JSON news stories from API and passes to PageHandler
+  constructor(props) {
+    super(props);
+    this.state = {
+      stories: [],
+    };
   }
 
   componentDidMount() {
@@ -157,17 +177,7 @@ class NewsContainer extends React.Component {
 
   render() {
     return (
-      <div id="newsContainer">
-        <NewsList
-          stories={this.state.stories}
-          pageNumber={this.state.pageNumber}
-        />
-        <PageNav
-          handleNext={this.handleNext}
-          handlePrev={this.handlePrev}
-          page={this.state.pageNumber}
-        />
-      </div>
+      <PageHandler stories={this.state.stories} />
     );
   }
 }
