@@ -11,8 +11,21 @@ const Header = (props) => {
   );
 }
 
-// Split into Container and Presentational
+// Presentational
 const NewsItem = (props) => {
+  return (
+    <div className='card'>
+      <div className='rank'>{props.rank}</div>
+      <div className='article'>
+        <div className='card-title'><a href={props.url} target='_blank' rel='noopener noreferrer' className='newslink'>{props.title}</a><span className='domain'> {props.domain}</span></div>
+        <div className='subtitle'><span className='score'>{props.score} points</span><span className='user'> by {props.by}</span><span className='time'> {props.time} ago</span></div>
+      </div>
+    </div>
+  );
+}
+
+// Container: Handles data
+const NewsItemContainer = (props) => {
   const item = props.item;
 
   // Hacker News articles do not have url in JSON object
@@ -26,16 +39,14 @@ const NewsItem = (props) => {
                                     : min + " minutes"
                         : hr === 1 ? + hr + " hour"
                                      : hr + " hours";
-
-  return (
-    <div className='card'>
-      <div className='rank'>{props.rank}</div>
-      <div className='article'>
-        <div className='card-title'><a href={url} target='_blank' rel='noopener noreferrer' className='newslink'>{item.title}</a><span className='domain'> {domain}</span></div>
-        <div className='subtitle'><span className='score'>{item.score} points</span><span className='user'> by {item.by}</span><span className='time'> {time} ago</span></div>
-      </div>
-    </div>
-  );
+  return <NewsItem rank={props.rank}
+                   url={url}
+                   title={item.title}
+                   domain={domain}
+                   score={item.score}
+                   by={item.by}
+                   time={time}
+                   key={item.id} />
 }
 
 // TODO: Split into Presentational and Container
@@ -51,9 +62,9 @@ const NewsList = (props) => {
     .map((item, i) => {
       const rank = pageLimit * (page - 1) + (i + 1);
       return (
-        <NewsItem item={item}
-              rank={rank}
-              key={item.id} />
+        <NewsItemContainer item={item}
+                           rank={rank}
+                           key={item.id} />
       );
   });
 
