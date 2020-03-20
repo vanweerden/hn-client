@@ -25,15 +25,15 @@ export class PageHandler extends React.Component {
   render() {
     return (
       <div id="newsContainer">
-        <NewsList
-          stories={this.props.stories}
-          pageNumber={this.state.pageNumber}
-        />
-        <PageNav
-          handleNext={this.handleNext}
-          handlePrev={this.handlePrev}
-          page={this.state.pageNumber}
-        />
+      <PageNav
+        handleNext={this.handleNext}
+        handlePrev={this.handlePrev}
+        page={this.state.pageNumber}
+      />
+      <NewsList
+        stories={this.props.stories}
+        pageNumber={this.state.pageNumber}
+      />
       </div>
     );
   }

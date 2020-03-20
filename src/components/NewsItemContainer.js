@@ -3,7 +3,7 @@ import { domainGrabber } from '../utils/domainGrabber';
 import { NewsItem } from './NewsItem';
 
 export const NewsItemContainer = (props) => {
-  // Handles data for NewsItem
+  // Handles data for NewsItem, which displays it
   const item = props.item;
 
   // Hacker News articles do not have url in JSON object

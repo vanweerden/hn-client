@@ -4,7 +4,7 @@ import { NewsItemContainer } from './NewsItemContainer';
 export const NewsList = (props) => {
   // Lists news items depending on page number
   const stories = props.stories;
-  const pageLimit = 25;
+  const pageLimit = 30;
   let page = props.pageNumber;
   let lastEntry = page * pageLimit;
   let firstEntry = lastEntry - (pageLimit - 1);
