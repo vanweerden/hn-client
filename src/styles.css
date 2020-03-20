@@ -84,10 +84,14 @@ header {
 #btnContainer {
   width: 100px;
   display: flex;
-  justify-content: space-between;
+  /* justify-content: flex-end; */
 }
 
 .navButton {
   padding: 5px;
   margin: 1em 5px 3em 0;
+}
+
+#nextBtn {
+  float: right;
 }

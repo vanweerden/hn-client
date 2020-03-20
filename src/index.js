@@ -11,8 +11,8 @@ const Header = (props) => {
   );
 }
 
-// Presentational
 const NewsItem = (props) => {
+  // Presentational
   return (
     <div className='card'>
       <div className='rank'>{props.rank}</div>
@@ -24,8 +24,8 @@ const NewsItem = (props) => {
   );
 }
 
-// Container: Handles data
 const NewsItemContainer = (props) => {
+  // Handles data for NewsItem
   const item = props.item;
 
   // Hacker News articles do not have url in JSON object
@@ -50,6 +50,7 @@ const NewsItemContainer = (props) => {
 }
 
 const NewsList = (props) => {
+  // Lists news items depending on page number
   const stories = props.stories;
   const pageLimit = 25;
   let page = props.pageNumber;
@@ -75,7 +76,8 @@ const Button = (props) => {
   if (props.shouldDisplay) {
     return (
       <button className="navButton"
-              onClick={props.onClick}>
+              onClick={props.onClick}
+              id={props.id}>
               {props.value}
      </button>
     );
@@ -89,12 +91,14 @@ const PageNav = (props) => {
     <div id="pageNav">
       <div id="btnContainer">
         <Button
+          id="prevBtn"
           value="Prev"
           onClick={props.handlePrev}
           page={props.page}
           shouldDisplay={props.page > 1}
           />
         <Button
+          id="nextBtn"
           value="Next"
           onClick={props.handleNext}
           page={props.page}
@@ -142,7 +146,7 @@ class PageHandler extends React.Component {
   }
 }
 
-class NewsContainer extends React.Component {
+class NewsFetch extends React.Component {
   // Fetchs JSON news stories from API and passes to PageHandler
   constructor(props) {
     super(props);
@@ -185,7 +189,7 @@ class NewsContainer extends React.Component {
 const App = () => (
   <div id="app">
     <Header />
-    <NewsContainer />
+    <NewsFetch />
   </div>
 );
 
