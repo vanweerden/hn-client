@@ -1,10 +1,26 @@
-
-/* ---- Colors ---- */
+/* ---- Default Color Scheme: Minimalist ---- */
 :root {
-  --darkText: #222;
-  --lightText: #777;
+  --fonts: "Helvetica", "Arial", sans-serif;
+  --bg-color: white;
+  --main-text: #222;
+  --other-text: #777;
   --color: #BBC3DF;
-  --colorLight: #E2E6F4;
+  --color-light: #E2E6F4;
+  --slider: #ccc;
+  --rank-size: 1.7em;
+}
+
+/* ---- Dark Color Scheme: Matrix ---- */
+[data-theme="dark"] {
+  --fonts: monospace; /*Look into Iosevka font */
+  --bg-color: #0D0208;
+  --main-text: #00FF41;
+  --other-text: #008F11;
+  --color: #00FF41;
+  --color-light: #00FF41;
+  --slider: #00FF41;
+  --slider-active: #008F11;
+  --rank-size: 1.2em;
 }
 
 /* ---- Universal styles ---- */
@@ -14,16 +30,19 @@
   box-sizing: border-box;
 }
 
-
 *:focus {
   outline: none;
-  box-shadow: 0 0 0 3px var(--colorLight);
+  box-shadow: 0 0 0 3px var(--color-light);
+}
+
+body {
+  color: var(--main-text);
 }
 
 #root {
-  font-family: "Helvetica", "Arial", sans-serif;
+  font-family: var(--fonts);
+  background-color: var(--bg-color);
 }
-
 
 #app {
   width: 75vw;
@@ -32,7 +51,7 @@
 
 /* ---- Header styles ---- */
 header {
-  border-bottom: 1px solid #DDD;
+  border-bottom: 1px solid var(--color);
   height: 70px;
   margin: 0 1em;
   display: flex;
@@ -42,12 +61,60 @@ header {
 
 #header-title {
   font-size: 1.3em;
-  color: var(--darkText);
+  color: var(--main-text);
   margin: 5px;
 }
 
-#header-author{
-  color: var(--lightText);
+/* ---- Theme Switch ---- */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 45px;
+  height: 25px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 17px;
+  width: 17px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+input:checked + .slider {
+  background-color: var(--slider-active);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--slider-active);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(19px);
+      -ms-transform: translateX(19px);
+          transform: translateX(19px);
 }
 
 /* ---- Nav button styles ---- */
@@ -62,14 +129,14 @@ header {
 .navButton {
   padding: 5px 10px;
   margin: 0 1em;
-  border: 1px solid black;
-  color: black;
-  background-color: white;
+  border: 1px solid var(--main-text);
+  color: var(--main-text);
+  background-color: var(--bg-color);
 }
 
 .navButton:hover {
   cursor: pointer;
-  background-color: var(--colorLight);
+  background-color: var(--color-light);
   color: #222;
   border: 1px solid #222;
 }
@@ -85,7 +152,7 @@ header {
 }
 
 .navButton:disabled:hover {
-  background-color: white;
+  background-color: var(--bg-color);
 }
 
 #prevBtn {
@@ -102,12 +169,12 @@ header {
   padding-bottom: 1em;
   display: flex;
   align-items: flex-start;
-  color: var(--lightText);
+  color: var(--other-text);
 }
 
 .rank {
   margin-right: 1em;
-  font-size: 1.7em;
+  font-size: var(--rank-size);
 }
 
 .article {
@@ -120,15 +187,15 @@ header {
 }
 
 .card-title a {
-  color: var(--darkText);
+  color: var(--main-text);
   text-decoration: none;
   font-size: 1.1em;
 }
 
 .domain {
-  font-size: 0.8em;
+  font-size: 0.9em;
 }
 
 .subtitle {
-  font-size: 0.7em;
+  font-size: 0.9em;
 }

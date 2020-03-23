@@ -1,10 +1,11 @@
 import React from "react";
+import { ThemeSwitchContainer } from "./ThemeSwitchContainer";
 
 export const Header = (props) => {
   return (
     <header>
       <div id='header-title'>React Hacker News</div>
-      <div id='header-author'>by Andrew van Weerden</div>
+      <ThemeSwitchContainer />
     </header>
   );
 }

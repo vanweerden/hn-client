@@ -11,7 +11,7 @@ export const PageNav = (props) => {
         page={props.page}
         disabled={props.page === 1}
         />
-      <div>{props.page} / 10</div>
+      <div id='pageNum'>{props.page} / 10</div>
       <Button
         id="nextBtn"
         value="Next"
