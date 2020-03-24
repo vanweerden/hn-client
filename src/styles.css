@@ -16,11 +16,12 @@
   --fonts: monospace; /*Look into Iosevka font */
   --bg-color: #0D0208;
   --main-text: #00FF41;
-  --other-text: #008F11;
-  --color: #008F11;
-  --color-light: #00FF41;
-  --slider: #00FF41;
-  --slider-active: #008F11;
+  --light-text: #4db366;
+  --color-dark: #00FF41;
+  --color: #00FF41;
+  --color-light: #4db366;
+  --slider: #4db366;
+  --slider-active: #4db366;
   --rank-size: 1.2em;
 }
 
