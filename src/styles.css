@@ -1,6 +1,6 @@
 /* ---- Default Color Scheme: Minimalist ---- */
 :root {
-  --fonts: "Helvetica", "Arial", sans-serif;
+  --fonts: "Lucida Grande", "Helvetica", "Arial", sans-serif;
   --bg-color: white;
   --main-text: #222;
   --light-text: #777;
@@ -165,20 +165,39 @@ input:checked + .slider:before {
 }
 
 /* ---- List styles ---- */
-#list {
-  margin: 1em 0;
+#entries {
+  font-size: 14px;
 }
 
-.card {
-  margin-bottom: 1em;
-  padding-bottom: 1em;
-  display: flex;
-  align-items: flex-start;
+.entry {
+  list-style-type: none;
+  margin: 0.5em 0;
 }
 
-.rank {
-  margin-right: 1em;
-  font-size: var(--rank-size);
+.story-info {
+  display: inline-block;
+  width: 160px;
+  padding: 6px 2px;
+  margin-right: 1.5em;
+  text-align: right;
+  font-size: 0.9em;
+  color: var(--main-text);
+}
+
+.entry a:visited {
+  color: var(--light-text);
+}
+
+.score {
+  display: inline-block;
+  margin-left: 2em;
+  width: 50px;
+}
+
+.story {
+  display: inline-block;
+  width: 75%;
+  padding: 6px 2px;
 }
 
 .article {
@@ -187,21 +206,11 @@ input:checked + .slider:before {
 }
 
 .card-title {
-  margin-bottom: 0.5em;
-}
-
-.card-title {
   color: var(--main-text);
-  font-size: 1.1em;
+  font-size: 1em;
 }
 
 .domain {
-  font-size: 0.9em;
+  font-size: 0.8em;
   color: var(--light-text);
-}
-
-.subtitle a {
-  font-size: 0.9em;
-  color: var(--light-text);
-  padding: 5px;
 }

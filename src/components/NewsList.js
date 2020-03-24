@@ -19,7 +19,10 @@ export const NewsList = (props) => {
                            key={item.id} />
       );
   });
+  // changed <div> to <table>
   return (
-    <div id='list'>{listItems}</div>
+    <ul id='entries'>
+      {listItems}
+    </ul>
   )
 }

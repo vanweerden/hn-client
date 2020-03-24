@@ -2,10 +2,10 @@ import React from "react";
 
 export const ThemeSwitch = props => {
   return (
-    <label class="switch">
+    <label className="switch">
       <input type="checkbox"
              onClick={props.clickHandler} />
-      <span class="slider"></span>
+      <span className="slider"></span>
     </label>
   );
 }

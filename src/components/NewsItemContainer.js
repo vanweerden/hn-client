@@ -11,6 +11,7 @@ export const NewsItemContainer = (props) => {
   const url = item.url ? item.url : itemUrl;
   const domain = item.url ? '(' + domainGrabber(url) + ')' : "";
 
+  // Not rendered anymore
   const ms = (Date.now() - item.time * 1000);
   const min = Math.floor((ms / 1000) / 60);
   const hr = Math.floor(min / 60);
