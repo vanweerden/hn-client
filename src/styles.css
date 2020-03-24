@@ -33,7 +33,7 @@
 
 *:focus {
   outline: none;
-  box-shadow: 0 0 0 3px var(--color);
+  box-shadow: 0 0 0 3px var(--color );
 }
 
 #root {
@@ -163,6 +163,10 @@ input:checked + .slider:before {
 
 #prevBtn {
   margin-left: 3em;
+}
+
+#page-num {
+  font-size: 14px;
 }
 
 /* ---- List styles ---- */
