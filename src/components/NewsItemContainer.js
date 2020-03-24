@@ -7,7 +7,8 @@ export const NewsItemContainer = (props) => {
   const item = props.item;
 
   // Hacker News articles do not have url in JSON object
-  const url = item.url ? item.url : "https://news.ycombinator.com/item?id=" + item.id;
+  const itemUrl = 'https://news.ycombinator.com/item?id=' + item.id;
+  const url = item.url ? item.url : itemUrl;
   const domain = item.url ? '(' + domainGrabber(url) + ')' : "";
 
   const ms = (Date.now() - item.time * 1000);
@@ -17,12 +18,14 @@ export const NewsItemContainer = (props) => {
                                     : min + " minutes"
                         : hr === 1 ? + hr + " hour"
                                      : hr + " hours";
+
   return <NewsItem rank={props.rank}
                    url={url}
                    title={item.title}
                    domain={domain}
                    score={item.score}
-                   by={item.by}
                    time={time}
-                   key={item.id} />
+                   key={item.id}
+                   comments={item.descendants}
+                   itemUrl={itemUrl} />
 }

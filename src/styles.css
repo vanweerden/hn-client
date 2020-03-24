@@ -3,7 +3,7 @@
   --fonts: "Helvetica", "Arial", sans-serif;
   --bg-color: white;
   --main-text: #222;
-  --other-text: #777;
+  --light-text: #777;
   --color: #BBC3DF;
   --color-light: #E2E6F4;
   --slider: #ccc;
@@ -35,10 +35,6 @@
   box-shadow: 0 0 0 3px var(--color-light);
 }
 
-body {
-  color: var(--main-text);
-}
-
 #root {
   font-family: var(--fonts);
   background-color: var(--bg-color);
@@ -47,6 +43,15 @@ body {
 #app {
   width: 75vw;
   margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+  color: var(--main-text);
+}
+
+a:hover {
+  background-color: var(--color-light);
 }
 
 /* ---- Header styles ---- */
@@ -169,7 +174,6 @@ input:checked + .slider:before {
   padding-bottom: 1em;
   display: flex;
   align-items: flex-start;
-  color: var(--other-text);
 }
 
 .rank {
@@ -186,16 +190,18 @@ input:checked + .slider:before {
   margin-bottom: 0.5em;
 }
 
-.card-title a {
+.card-title {
   color: var(--main-text);
-  text-decoration: none;
   font-size: 1.1em;
 }
 
 .domain {
   font-size: 0.9em;
+  color: var(--light-text);
 }
 
-.subtitle {
+.subtitle a {
   font-size: 0.9em;
+  color: var(--light-text);
+  padding: 5px;
 }
