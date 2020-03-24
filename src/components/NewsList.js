@@ -22,6 +22,10 @@ export const NewsList = (props) => {
   // changed <div> to <table>
   return (
     <ul id='entries'>
+      <li id='data-title'>
+        <span id='comments-title'>comments</span>
+        <span id='score-title'>points</span>
+      </li>
       {listItems}
     </ul>
   )
