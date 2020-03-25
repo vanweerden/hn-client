@@ -1,6 +1,6 @@
 {
-  "short_name": "Simple Hacker News",
-  "name": "Simple Hacker News Interface",
+  "short_name": "Slacker Hacker News",
+  "name": "Slacker Hacker News: A minimalist Hacker News interface",
   "icons": [
     {
       "src": "favicon.ico",
