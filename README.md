@@ -19,4 +19,4 @@ Finished for now. I might return to it later to add features.
 The front-end design was heavily inspired by ([hckr news](https://hckrnews.com/)).
 
 ### Misc
-* Check out the switch on the right side of the header
+* Check out the switch on the right side of the header. And then please forgive me.
