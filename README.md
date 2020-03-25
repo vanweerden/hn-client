@@ -9,8 +9,8 @@ This is a minimalist [Hacker News](https://news.ycombinator.com/) interface buil
 ### To-do List
 - [x] Build front-end
 - [x] Deploy app
-- [] Fix up mobile styles (dark mode messes up the header)
-- [] Add custom domain name?
+- [ ] Fix up mobile styles (dark mode messes up the header)
+- [ ] Add custom domain name?
 
 ### Status
 Finished for now. I might return to it later to add features.
