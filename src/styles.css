@@ -53,6 +53,11 @@ a {
   color: var(--main-text);
 }
 
+body {
+  font-size: 15px;
+  color: var(--main-text);
+}
+
 /* ---- Header styles ---- */
 header {
   border-bottom: 1px solid var(--slider);
@@ -65,10 +70,9 @@ header {
 }
 
 #header-title {
-  font-size: 1.3em;
+  font-size: 1.7em;
   font-weight: bold;
   margin-left: 1em;
-  color: var(--main-text);
 }
 
 /* ---- Theme Switch ---- */
@@ -137,7 +141,6 @@ input:checked + .slider:before {
   padding: 5px 10px;
   margin: 0 1em;
   border: 1px solid var(--main-text);
-  color: var(--main-text);
   background-color: var(--bg-color);
 }
 
@@ -167,23 +170,26 @@ input:checked + .slider:before {
 }
 
 #page-num {
-  font-size: 14px;
+  font-size: 15px;
 }
 
 /* ---- List styles ---- */
 #entries {
-  font-size: 14px;
   list-style-type: none;
+  margin-bottom: 3em;
 }
 
 #data-title {
+  display: flex;
+  justify-content: flex-start;
   font-size: 0.8em;
   text-align: right;
   width: 160px;
+  padding-left: 2.5em;
 }
 
 #score-title {
-  margin-left: 3rem;
+  margin-left: 2.6rem;
 }
 
 .entry {
@@ -202,7 +208,6 @@ input:checked + .slider:before {
   margin-right: 1.5em;
   text-align: right;
   font-size: 0.9em;
-  color: var(--main-text);
 }
 
 .entry a:visited {
@@ -227,11 +232,21 @@ input:checked + .slider:before {
 }
 
 .card-title {
-  color: var(--main-text);
   font-size: 1em;
 }
 
 .domain {
   font-size: 0.8em;
   color: var(--light-text);
+}
+
+@media screen and (max-width: 750px) {
+  #data-title {
+    width: auto;
+  }
+
+  #app {
+    width: auto;
+    font-size: 0.9em;
+  }
 }
