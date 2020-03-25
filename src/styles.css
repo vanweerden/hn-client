@@ -188,6 +188,7 @@ input:checked + .slider:before {
 
 .entry {
   margin: 0.5em 0;
+  display: flex;
 }
 
 .entry a:hover {
