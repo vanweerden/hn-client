@@ -10,6 +10,7 @@ Project created with
 ### To-do List
 - [x] Build front-end
 - [x] Deploy app
+- [] Fix up mobile styles (dark mode messes up the header)
 - [] Add custom domain name?
 
 ### Status
