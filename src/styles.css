@@ -131,6 +131,19 @@ input:checked + .slider:before {
           transform: translateX(19px);
 }
 
+#hax-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+#hax {
+  height: 20px;
+  color: var(--main-color);
+  padding-top: 1em;
+}
+
 /* ---- Nav button styles ---- */
 #pageNav {
   display: flex;

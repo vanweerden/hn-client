@@ -12,12 +12,12 @@ export class ThemeSwitchContainer extends React.Component {
 
   toggleTheme() {
     this.setState(prevState => ({
-      check: !prevState.check
+      checked: !prevState.checked
     }));
   }
 
   componentDidUpdate() {
-    if (this.state.check) {
+    if (this.state.checked) {
       document.documentElement.setAttribute('data-theme', 'dark');
     } else {
       document.documentElement.setAttribute('data-theme', 'default');
@@ -25,6 +25,7 @@ export class ThemeSwitchContainer extends React.Component {
   }
 
   render() {
-    return <ThemeSwitch clickHandler={this.toggleTheme} />;
+    return <ThemeSwitch clickHandler={this.toggleTheme}
+                        isDarkMode={this.state.checked} />;
   }
 }
