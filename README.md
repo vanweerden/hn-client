@@ -1,5 +1,5 @@
-## Hacker News Client
-This is a React app that fetches data from the ([Hacker News API](https://github.com/HackerNews/API)) and displays the top 300 stories. The aim was to create a decluttered interface that is easy on the eyes and to gain experience with React and interacting with a JSON API.
+## Simple Hacker News
+This is a minimalist ([Hacker News](https://news.ycombinator.com/)) interface built with React that fetches data from the ([Hacker News API](https://github.com/HackerNews/API)) and displays the top 300 stories. The aim was to create a decluttered interface that is easier on the eyes. I also wanted to gain experience with React and interacting with a JSON API. See deployment ([here](https://intense-brook-19858.herokuapp.com/)).
 
 ### Built with
 Project created with
@@ -9,12 +9,11 @@ Project created with
 
 ### To-do List
 - [x] Build front-end
-- [ ] Write back-end with node.js and Express
-- [ ] Deploy app
+- [x] Deploy app
+- [] Add custom domain name?
 
 ### Status
-Project is in progress.
-
+Finished for now. I might return to it later to add features.
 
 ### Inspiration
 The front-end design was heavily inspired by ([hckr news](https://hckrnews.com/)).
