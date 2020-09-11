@@ -1,5 +1,5 @@
 ## Slacker News
-This is a minimalist [Hacker News](https://news.ycombinator.com/) interface built with React that fetches data from the [Hacker News API](https://github.com/HackerNews/API) and displays the top 300 stories. The aim was to create a decluttered interface that is easier on the eyes. I also wanted to gain experience with React and interacting with a JSON API. [See deployment here](https://intense-brook-19858.herokuapp.com/).
+This is a minimalist [Hacker News](https://news.ycombinator.com/) interface built with React that fetches data from the [Hacker News API](https://github.com/HackerNews/API) and displays the top 300 stories. The aim was to create a decluttered interface that is easier on the eyes. I also wanted to gain experience with React and interacting with a JSON API. [See deployment here](https://vanweerden-slacker-news.glitch.me).
 
 ### Built with
 * [Create React App](https://github.com/facebook/create-react-app)
